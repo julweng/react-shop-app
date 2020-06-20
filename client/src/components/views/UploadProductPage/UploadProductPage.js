@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { func, number, shape } from "prop-types"
+import { func, string, shape } from "prop-types"
 import { Typography, Button, Form, Input } from "antd"
-import FileUpload from "../../utils/FileUpload"
-import uploadProduct from "../../../functions/uploadProduct"
+import { FileUpload } from "../../utils"
+import { uploadProduct } from "../../../functions"
 
 const { Title } = Typography
 const { TextArea } = Input
@@ -48,7 +48,11 @@ export default function UploadProductPage({ user, history: { push } }) {
     setImages(newImages)
   }
 
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
+    if (!title || !description || !price || !images || !continent) {
+      return alert('Fill all fields.')
+    }
+
     ev.preventDefault()
     const data = {
       writer: user.userData._id,
@@ -59,7 +63,8 @@ export default function UploadProductPage({ user, history: { push } }) {
       continents: continent
     }
 
-    uploadProduct(data, push)
+    const res = await uploadProduct(data)
+    if (res.success) push("/")
   }
 
   return (
@@ -99,7 +104,7 @@ export default function UploadProductPage({ user, history: { push } }) {
 UploadProductPage.propTypes = {
   user: shape({
     userData: shape({
-      _id: number
+      _id: string
     }),
     history: shape({
       push: func

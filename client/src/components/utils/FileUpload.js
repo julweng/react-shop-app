@@ -2,12 +2,12 @@ import React, { useState } from "react"
 import { func } from "prop-types"
 import Dropzone from "react-dropzone"
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons"
-import uploadImage from "../../functions/uploadImage"
+import { uploadImage } from "../../functions"
 
 export default function FileUpload({ refreshFunction }) {
   const [images, setImages] = useState([])
 
-  const onDrop = (files) => {
+  const onDrop = async (files) => {
     let formData = new FormData()
 
     const config = {
@@ -17,7 +17,11 @@ export default function FileUpload({ refreshFunction }) {
     formData.append("file", files[0])
 
     // save image in node server
-    uploadImage(formData, config, images, setImages, refreshFunction)
+    const res = await uploadImage(formData, config)
+    if (res.success) {
+      setImages([...images, res.image])
+    refreshFunction([...images, res.image])
+    }
   }
 
   const onDelete = (index) => {
@@ -62,7 +66,7 @@ export default function FileUpload({ refreshFunction }) {
                 fontSize: "3rem",
                 position: "absolute",
                 top: "40%",
-                left: "45%"
+                left: "43%"
               }}
               onClick={() => onDelete(index)}
             />
