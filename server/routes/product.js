@@ -45,16 +45,26 @@ router.post("/uploadProduct", auth, (req, res) => {
   // save submitted data to database
   const product = new Product(req.body)
   product.save((err) => {
-    if (err) return res.status(400).json({ success: false, err})
+    if (err) return res.status(400).json({ success: false, err })
     return res.status(200).json({ success: true })
   })
 })
 
 router.post("/getProducts", auth, (req, res) => {
-  Product.find().exec((err, products) => {
-    if (err) return res.status(400).json({ success: false, err})
-    res.status(200).json({success: true, products})
-  })
+  const order = req.body.order ? req.body.order : "desc"
+  const sortBy = req.body.sortBy ? req.body.sortBy : "_id"
+  const limit = req.body.limit ? parseInt(req.body.limit) : 100
+  const skip = parseInt(req.body.skip)
+
+  Product.find()
+    .populate("write")
+    .sort([[sortBy, order]])
+    .skip(skip)
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) return res.status(400).json({ success: false, err })
+      res.status(200).json({ success: true, products, postSize: products.length })
+    })
 })
 
 module.exports = router

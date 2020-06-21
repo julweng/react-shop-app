@@ -6,14 +6,48 @@ import ProductCard from "./ProductCard"
 
 function LandingPage() {
   const [products, setProducts] = useState([])
+  const [skip, setSkip] = useState(0)
+  const [postSize, setPostSize] = useState()
+  const LIMIT = 1
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getProducts()
-      setProducts(res.products)
+      const data = {
+        skip,
+        limit: LIMIT
+      }
+
+      const res = await getProducts(data)
+      if (res.success) {
+        loadProducts(data.loadMore, res.products)
+        setPostSize(res.postSize)
+      }
     }
     fetchData()
   }, [])
 
+  const loadProducts = (loadMore, loadedProducts) => {
+    if (loadMore) {
+      const [loaded] = loadedProducts
+      setProducts([...products, loaded])
+    }
+    setProducts(loadedProducts)
+  }
+
+  const onLoadMore = async () => {
+    let skipNum = skip + LIMIT
+
+    const data = {
+      skip: skipNum,
+      limit: LIMIT,
+      loadMore: true
+    }
+
+    const res = await getProducts(data)
+    loadProducts(data.loadMore, res.products)
+    setSkip(skipNum)
+  }
+  console.log(products)
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -48,9 +82,11 @@ function LandingPage() {
       )}
       <br />
       <br />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>Load More</button>
-      </div>
+      {postSize >= LIMIT && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={onLoadMore}>Load More</button>
+        </div>
+      )}
     </div>
   )
 }

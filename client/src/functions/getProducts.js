@@ -1,7 +1,8 @@
 import axios from "axios"
 
-const getProducts = async () => {
-  const res = await axios.post("/api/product/getProducts")
+const getProducts = async (data) => {
+  const res = await axios.post("/api/product/getProducts", data)
+  
   if (res.data.success) {
     return res.data
   } else {
