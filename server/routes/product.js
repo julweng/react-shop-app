@@ -50,20 +50,36 @@ router.post("/uploadProduct", auth, (req, res) => {
   })
 })
 
-router.post("/getProducts", auth, (req, res) => {
+router.post("/getProducts", (req, res) => {
   const order = req.body.order ? req.body.order : "desc"
   const sortBy = req.body.sortBy ? req.body.sortBy : "_id"
   const limit = req.body.limit ? parseInt(req.body.limit) : 100
   const skip = parseInt(req.body.skip)
 
-  Product.find()
+  let findArgs = {}
+
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      if (key === "price") {
+        findArgs[key] = {
+          $gte: req.body.filters[key][0],
+          $lte: req.body.filters[key][1]
+        }
+      } else {
+        findArgs[key] = req.body.filters[key]
+      }
+    }
+  }
+
+  Product
+    .find(findArgs)
     .populate("write")
     .sort([[sortBy, order]])
     .skip(skip)
     .limit(limit)
     .exec((err, products) => {
       if (err) return res.status(400).json({ success: false, err })
-      res.status(200).json({ success: true, products, postSize: products.length })
+      res.status(200).json({ success: true, products, postSize: products.length - skip })
     })
 })
 

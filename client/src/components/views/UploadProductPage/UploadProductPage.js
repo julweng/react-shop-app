@@ -3,19 +3,10 @@ import { func, string, shape } from "prop-types"
 import { Typography, Button, Form, Input } from "antd"
 import { FileUpload } from "../../utils"
 import { uploadProduct } from "../../../functions"
+import { continentOptions as Continents } from "../constants"
 
 const { Title } = Typography
 const { TextArea } = Input
-
-const Continents = [
-  { key: 1, value: "Africa" },
-  { key: 2, value: "Antarctica" },
-  { key: 3, value: "Asia" },
-  { key: 4, value: "Australia" },
-  { key: 5, value: "Europe" },
-  { key: 6, value: "North America" },
-  { key: 7, value: "South America" }
-]
 
 export default function UploadProductPage({ user, history: { push } }) {
   const [title, setTitle] = useState("")
@@ -88,7 +79,7 @@ export default function UploadProductPage({ user, history: { push } }) {
         <Input onChange={onPriceChange} value={price} type="number" />
         <select onChange={onContinentChange}>
           {Continents.map((item) => (
-            <option key={item.key} value={continent}>
+            <option key={item.key} value={item.key}>
               {item.value}
             </option>
           ))}
