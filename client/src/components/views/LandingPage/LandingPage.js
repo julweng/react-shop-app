@@ -5,6 +5,7 @@ import { getProducts } from "../../../functions"
 import ProductCard from "./ProductCard"
 import CheckBox from "./CheckBox"
 import RadioInput from "./RadioInput"
+import SearchBar from "./SearchBar"
 import { priceFilter } from "../constants"
 
 function LandingPage() {
@@ -16,6 +17,7 @@ function LandingPage() {
     continents: [],
     price: []
   })
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +87,6 @@ function LandingPage() {
 
     if (category === "price") {
       const priceValues = handlePrice(filter)
-      console.log(priceValues)
       newFilters[category] = priceValues
     } else {
       newFilters[category] = filter
@@ -94,7 +95,21 @@ function LandingPage() {
     showFilteredResults(newFilters)
     setFilters(newFilters)
   }
-console.log(postSize)
+
+  const updateSearchTerm = async (searchTerm) => {
+    setSearchTerm(searchTerm)
+
+    const data = {
+      skip: 0,
+      limit: LIMIT,
+      filters,
+      searchTerm
+    }
+    setSkip(0)
+    const res = await getProducts(data)
+    loadProducts(data.loadMore, res.products)
+  }
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
@@ -114,8 +129,9 @@ console.log(postSize)
           />
         </Col>
       </Row>
-
-      {/* Search */}
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <SearchBar searchTerm={searchTerm} refreshFunction={updateSearchTerm} />
+      </div>
       {products.length === 0 ? (
         <div
           style={{
@@ -125,7 +141,7 @@ console.log(postSize)
             alignItems: "center"
           }}
         >
-          <h2>NO post yet...</h2>
+          <h2>NO products posted yet...</h2>
         </div>
       ) : (
         <div>
@@ -141,7 +157,13 @@ console.log(postSize)
       <br />
       <br />
       {postSize >= LIMIT && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "1rem auto"
+          }}
+        >
           <button onClick={onLoadMore}>Load More</button>
         </div>
       )}

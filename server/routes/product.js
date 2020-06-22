@@ -57,6 +57,7 @@ router.post("/getProducts", (req, res) => {
   const skip = parseInt(req.body.skip)
 
   let findArgs = {}
+  let term = req.body.searchTerm
 
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
@@ -71,16 +72,32 @@ router.post("/getProducts", (req, res) => {
     }
   }
 
-  Product
-    .find(findArgs)
-    .populate("write")
-    .sort([[sortBy, order]])
-    .skip(skip)
-    .limit(limit)
-    .exec((err, products) => {
-      if (err) return res.status(400).json({ success: false, err })
-      res.status(200).json({ success: true, products, postSize: products.length - skip })
-    })
+  if (term) {
+    Product.find(findArgs)
+      .find({ $text: { $search: term } })
+      .populate("write")
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(limit)
+      .exec((err, products) => {
+        if (err) return res.status(400).json({ success: false, err })
+        res
+          .status(200)
+          .json({ success: true, products, postSize: products.length - skip })
+      })
+  } else {
+    Product.find(findArgs)
+      .populate("write")
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(limit)
+      .exec((err, products) => {
+        if (err) return res.status(400).json({ success: false, err })
+        res
+          .status(200)
+          .json({ success: true, products, postSize: products.length - skip })
+      })
+  }
 })
 
 module.exports = router
