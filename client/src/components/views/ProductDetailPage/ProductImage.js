@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 import { arrayOf, string, shape } from "prop-types"
 import ImageGallery from "react-image-gallery"
 
@@ -8,10 +8,10 @@ export default function ProductImage({ detail: { images } }) {
   useEffect(() => {
     if (images && images.length > 0) {
       let productImgs = []
-      
-      images.map(img => {
+
+      images.map((img) => {
         const imgUrl = `http://localhost:5000/${img}`
-        productImgs.push({
+        return productImgs.push({
           original: imgUrl,
           thumbnail: imgUrl
         })
@@ -19,7 +19,7 @@ export default function ProductImage({ detail: { images } }) {
 
       setProductImages(productImgs)
     }
-  }, [images]) 
+  }, [images])
 
   return (
     <div>

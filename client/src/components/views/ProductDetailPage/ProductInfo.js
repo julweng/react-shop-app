@@ -1,10 +1,18 @@
-import React from 'react'
-import { number, shape, string } from "prop-types"
+import React from "react"
+import { func, number, shape, string } from "prop-types"
 import { Button, Descriptions } from "antd"
 
 const { Item } = Descriptions
 
-export default function ProductInfo({ detail: { description, price, sold, views } }) {
+export default function ProductInfo({
+  detail: { _id, description, price, sold, views },
+  addToCart
+}) {
+
+  const handleAddToCart = () => {
+    addToCart(_id)
+  }
+
   return (
     <div>
       <Descriptions title="Product Info">
@@ -17,17 +25,19 @@ export default function ProductInfo({ detail: { description, price, sold, views 
         <br />
         <br />
       </Descriptions>
-      <div style={{ display: "flex", justifyContent: "center"}}>
-          <Button size="large" shape="round" type="danger">
-            Add to Cart
-          </Button>
-        </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Button size="large" shape="round" type="danger" onClick={handleAddToCart}>
+          Add to Cart
+        </Button>
+      </div>
     </div>
   )
 }
 
 ProductInfo.propTypes = {
+  addToCart: func,
   detail: shape({
+    _id: string,
     description: string,
     price: number,
     sold: number,

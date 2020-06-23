@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { string } from "prop-types"
+import { useDispatch } from "react-redux"
 import { Row, Col } from "antd"
 import { getProduct } from "../../../functions"
 import ProductImage from "./ProductImage"
 import ProductInfo from "./ProductInfo"
+import { addToCart } from "../../../_actions/user_actions"
 
 export default function ProductDetailPage({ match: { params: { productId }} }) {
+  const dispatch = useDispatch()
+
   const [product, setProduct] = useState({})
   
   useEffect(() => {
@@ -15,7 +19,11 @@ export default function ProductDetailPage({ match: { params: { productId }} }) {
     }
     
     fetchData()
-  }, [])
+  }, [productId])
+
+  const addToCartHandler = (productId) => {
+    dispatch(addToCart(productId))
+  }
 
   return (
     <div className="post__page" style={{ width: "100%", padding: "3rem 4rem" }}>
@@ -28,7 +36,7 @@ export default function ProductDetailPage({ match: { params: { productId }} }) {
           <ProductImage detail={product} />
         </Col>
         <Col lg={12} xs={24} detail={product} >
-          <ProductInfo detail={product} />
+          <ProductInfo detail={product} addToCart={addToCartHandler} />
         </Col>
       </Row>
     </div>
