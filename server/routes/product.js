@@ -75,7 +75,7 @@ router.post("/getProducts", (req, res) => {
   if (term) {
     Product.find(findArgs)
       .find({ $text: { $search: term } })
-      .populate("write")
+      .populate("writer")
       .sort([[sortBy, order]])
       .skip(skip)
       .limit(limit)
@@ -87,7 +87,7 @@ router.post("/getProducts", (req, res) => {
       })
   } else {
     Product.find(findArgs)
-      .populate("write")
+      .populate("writer")
       .sort([[sortBy, order]])
       .skip(skip)
       .limit(limit)
@@ -98,6 +98,22 @@ router.post("/getProducts", (req, res) => {
           .json({ success: true, products, postSize: products.length - skip })
       })
   }
+})
+
+router.get("/products_by_id", (req, res) => {
+  // ?id=${productId}&type=single
+  let type = req.query.type
+  let productIds = req.query.id
+
+  if (type === "array") {
+  }
+
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((err, product) => {
+      if (err) return res.status(400).send(err)
+      return res.status(200).send(product)
+    })
 })
 
 module.exports = router

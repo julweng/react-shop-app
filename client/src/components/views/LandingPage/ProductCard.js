@@ -5,10 +5,19 @@ import { ImageSlider } from "../../utils"
 
 const { Meta } = Card
 
-export default function ProductCard({ product: { title, price, images, createdAt } }) {
+export default function ProductCard({
+  product: { _id, title, price, images, createdAt }
+}) {
   return (
     <div>
-      <Card hoverable cover={<ImageSlider createdAt={createdAt} images={images} />}>
+      <Card
+        hoverable
+        cover={
+          <a href={`/product/${_id}`}>
+            <ImageSlider createdAt={createdAt} images={images} />
+          </a>
+        }
+      >
         <Meta title={title} description={`$${price}`} />
       </Card>
     </div>
@@ -17,6 +26,7 @@ export default function ProductCard({ product: { title, price, images, createdAt
 
 ProductCard.propTypes = {
   product: shape({
+    _id: string,
     createdAt: string,
     title: string,
     price: number,
