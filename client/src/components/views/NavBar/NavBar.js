@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import LeftMenu from "./Sections/LeftMenu"
-import RightMenu from "./Sections/RightMenu"
 import { Drawer, Button } from "antd"
 import { AlignRightOutlined } from "@ant-design/icons"
-import "./Sections/Navbar.css"
+import LeftMenu from "./LeftMenu"
+import RightMenu from "./RightMenu"
+import "./Navbar.css"
 
 function NavBar() {
   const [visible, setVisible] = useState(false)

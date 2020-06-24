@@ -2,17 +2,21 @@ import React, { Suspense } from "react"
 import { Route, Switch } from "react-router-dom"
 import Auth from "../hoc/auth"
 // pages for this product
-import LandingPage from "./views/LandingPage/LandingPage"
-import LoginPage from "./views/LoginPage/LoginPage.js"
-import RegisterPage from "./views/RegisterPage/RegisterPage"
-import NavBar from "./views/NavBar/NavBar"
-import Footer from "./views/Footer/Footer"
-import UploadProductPage from "./views/UploadProductPage/UploadProductPage"
-import ProductDetailPage from "./views/ProductDetailPage/ProductDetailPage"
+import {
+  Footer,
+  LandingPage,
+  LoginPage,
+  NavBar,
+  ProductDetailPage,
+  RegisterPage,
+  ShoppingCart,
+  UploadProductPage
+} from "./views"
 
-//null   Anyone Can go inside
-//true   only logged in user can go inside
-//false  logged in user can't go inside
+// Auth(component, boolean) 
+// null  Anyone Can go inside
+// true   only logged in user can go inside
+// false  logged in user can't go inside
 
 function App() {
   return (
@@ -32,6 +36,11 @@ function App() {
             exact
             path="/product/:productId"
             component={Auth(ProductDetailPage, null)}
+          />
+          <Route
+            exact
+            path="/user/cart"
+            component={Auth(ShoppingCart, null)}
           />
         </Switch>
       </div>

@@ -101,11 +101,14 @@ router.post("/getProducts", (req, res) => {
 })
 
 router.get("/products_by_id", (req, res) => {
-  // ?id=${productId}&type=single
-  let type = req.query.type
+  // if we have multiple ids, it will look like
+  // id=121212, 13131313, 14141414
+  const { type } = req.query
   let productIds = req.query.id
 
   if (type === "array") {
+    let ids = req.query.id.split(",")
+    productIds = ids.map(id => id.trim())
   }
 
   Product.find({ _id: { $in: productIds } })
