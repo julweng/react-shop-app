@@ -4,6 +4,7 @@ import Auth from "../hoc/auth"
 // pages for this product
 import {
   Footer,
+  HistoryPage,
   LandingPage,
   LoginPage,
   NavBar,
@@ -42,6 +43,7 @@ function App() {
             path="/user/cart"
             component={Auth(ShoppingCart, null)}
           />
+          <Route exact path="/history" component={Auth(HistoryPage, true)} />
         </Switch>
       </div>
       <Footer />

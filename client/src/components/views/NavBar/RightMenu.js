@@ -11,7 +11,7 @@ const { Item } = Menu
 
 function RightMenu({ mode, history: push }) {
   const user = useSelector((state) => state.user)
-console.log(user)
+
   const logoutHandler = async () => {
     const logOutSuccess = await logout()
     if (logOutSuccess) {
@@ -21,7 +21,7 @@ console.log(user)
 
   let count = 0
   if (user.userData && user.userData.cart && user.userData.cart.length) {
-    user.userData.cart.forEach(item => count += item.quantity)
+    user.userData.cart.forEach((item) => (count += item.quantity))
   }
 
   if (user.userData && !user.userData.isAuth) {
@@ -38,6 +38,9 @@ console.log(user)
   } else {
     return (
       <Menu mode={mode}>
+        <Item key="history">
+          <a href="/history">History</a>
+        </Item>
         <Item key="upload">
           <a href="/product/upload" style={{ color: "#667777" }}>
             <UploadOutlined style={{ fontSize: 20, marginBottom: 4 }} />

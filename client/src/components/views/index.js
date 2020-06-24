@@ -1,4 +1,5 @@
 import Footer from "./Footer/Footer"
+import HistoryPage from "./HistoryPage/HistoryPage"
 import LandingPage from "./LandingPage/LandingPage"
 import LoginPage from "./LoginPage/LoginPage"
 import NavBar from "./NavBar/NavBar"
@@ -9,6 +10,7 @@ import UploadProductPage from "./UploadProductPage/UploadProductPage"
 
 export {
   Footer,
+  HistoryPage,
   LandingPage,
   LoginPage,
   NavBar,
