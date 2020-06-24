@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react"
 import { arrayOf, shape } from "prop-types"
 import { useDispatch } from "react-redux"
 import { Result, Empty } from "antd"
-import { getCartItems, removeCartItem } from "../../../_actions/user_actions"
+import {
+  getCartItems,
+  removeCartItem,
+  onSuccessBuy
+} from "../../../_actions/user_actions"
+import { PayPal } from "../../utils"
 import UserCardBlock from "./UserCardBlock"
 
 export default function ShoppingCart({ user: { userData, cartDetail } }) {
@@ -11,6 +16,7 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
   const [totalPrice, setTotalPrice] = useState(0)
   const [showTotal, setShowTotal] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+
   useEffect(() => {
     let cartItems = []
     if (userData && userData.cart) {
@@ -30,8 +36,9 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
   const calculateTotal = (cartDetail) => {
     let total = 0
     cartDetail.forEach(
-      (item) => parseInt((total += item.price)) * item.quantity
+      (item) => (total += parseInt(item.price, 10) * item.quantity)
     )
+
     setShowTotal(true)
     setTotalPrice(total)
   }
@@ -44,6 +51,29 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
         calculateTotal(res.payload.cartDetail)
       }
     })
+  }
+
+  const transactionSuccess = (data) => {
+    dispatch(
+      onSuccessBuy({
+        cartDetail: cartDetail,
+        paymentData: data
+      })
+    ).then((res) => {
+      if (res.payload.success) {
+        setShowSuccess(true)
+        setShowTotal(false)
+        alert("PayPal payment successful")
+      }
+    })
+  }
+
+  const transactionError = () => {
+    alert("PayPal error")
+  }
+
+  const transactionCanceled = () => {
+    alert("PayPal payment canceled")
   }
 
   return (
@@ -78,6 +108,14 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
           </div>
         )}
       </div>
+      {showTotal && (
+        <PayPal
+          toPay={totalPrice}
+          onSuccess={transactionSuccess}
+          transactionError={transactionError}
+          transactionCanceled={transactionCanceled}
+        />
+      )}
     </div>
   )
 }

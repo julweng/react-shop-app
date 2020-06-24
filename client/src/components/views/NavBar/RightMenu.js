@@ -11,10 +11,17 @@ const { Item } = Menu
 
 function RightMenu({ mode, history: push }) {
   const user = useSelector((state) => state.user)
-
+console.log(user)
   const logoutHandler = async () => {
     const logOutSuccess = await logout()
-    if (logOutSuccess) push("/login")
+    if (logOutSuccess) {
+      push("/login")
+    }
+  }
+
+  let count = 0
+  if (user.userData && user.userData.cart && user.userData.cart.length) {
+    user.userData.cart.forEach(item => count += item.quantity)
   }
 
   if (user.userData && !user.userData.isAuth) {
@@ -37,7 +44,7 @@ function RightMenu({ mode, history: push }) {
           </a>
         </Item>
         <Item key="cart">
-          <Badge count={0}>
+          <Badge count={count}>
             <a href="/user/cart" style={{ marginRight: -22, color: "#667777" }}>
               <ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 4 }} />
             </a>
