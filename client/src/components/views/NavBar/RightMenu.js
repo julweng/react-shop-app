@@ -9,14 +9,12 @@ import { logout } from "../../../functions"
 
 const { Item } = Menu
 
-function RightMenu({ mode, history: push }) {
+function RightMenu({ mode, history }) {
   const user = useSelector((state) => state.user)
 
   const logoutHandler = async () => {
-    const logOutSuccess = await logout()
-    if (logOutSuccess) {
-      push("/login")
-    }
+    const res = await logout()
+    if (res.success) history.push("/login")
   }
 
   let count = 0
@@ -27,12 +25,12 @@ function RightMenu({ mode, history: push }) {
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={mode}>
-        <Menu.Item key="mail">
+        <Item key="mail">
           <a href="/login">Sign in</a>
-        </Menu.Item>
-        <Menu.Item key="app">
+        </Item>
+        <Item key="app">
           <a href="/register">Sign up</a>
-        </Menu.Item>
+        </Item>
       </Menu>
     )
   } else {

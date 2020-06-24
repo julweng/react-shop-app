@@ -31,7 +31,7 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
         })
       }
     }
-  }, [userData])
+  }, [userData, dispatch])
 
   const calculateTotal = (cartDetail) => {
     let total = 0

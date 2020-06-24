@@ -33,6 +33,7 @@ function LandingPage() {
       }
     }
     fetchData()
+    // eslint-disable-next-line
   }, [])
 
   const loadProducts = (loadMore, loadedProducts) => {
