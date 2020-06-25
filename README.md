@@ -1,15 +1,29 @@
-Hello, My Friends  
-Thank you for Having interest in this repository !
+# Travel Shop App
 
-To use this application,
+Travel Shop App is a full-stack project that lets user search, view, upload, select, and purchase travel plans.
 
-1. make dev.js file inside config folder
-2. put mongoDB info into dev.js file
-3. Type " npm install " inside the root directory ( Download Server Dependencies )
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+This is created based on the [MERN Project tutorial](https://www.youtube.com/watch?v=zaWtIkJgah4&list=WL&index=4&t=0s) with some modifications. 
 
-If you have problem, feel free to ask me ^^
+Download the repo and `yarn run dev` will start the back and front end.
+By default, the back end runs on port 5000 and the front end runs on port 3000.
 
-You can watch the tutorial for this app.
+## What does the app do
+This app currently has the following features:
+1. Search travel package products by search terms or continent and price filters. 
+2. Upload travel products, associated images and descriptions.
+3. Select products and edit carts.
+4. Make payment through PayPal. Try with a [sandbox account](https://developer.paypal.com/developer/accounts/).
+5. View purchase history.
 
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
+
+## Front-end Technology
+- HTML5
+- CSS3
+- ReactJS
+- Ant design
+- Formik
+
+## Back-end Technology
+- Mongoose
+- MongoDB
+
