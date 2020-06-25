@@ -6,6 +6,7 @@ import { ShoppingCartOutlined, UploadOutlined } from "@ant-design/icons"
 import { withRouter } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { logout } from "../../../functions"
+import "./RightMenu.css"
 
 const { Item } = Menu
 
@@ -40,13 +41,13 @@ function RightMenu({ mode, history }) {
           <a href="/history">History</a>
         </Item>
         <Item key="upload">
-          <a href="/product/upload" style={{ color: "#667777" }}>
+          <a href="/product/upload">
             <UploadOutlined style={{ fontSize: 20, marginBottom: 4 }} />
           </a>
         </Item>
         <Item key="cart">
           <Badge count={count}>
-            <a href="/user/cart" style={{ marginRight: -22, color: "#667777" }}>
+            <a href="/user/cart">
               <ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 4 }} />
             </a>
           </Badge>

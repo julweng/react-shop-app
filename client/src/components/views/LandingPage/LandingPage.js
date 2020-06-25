@@ -7,9 +7,10 @@ import CheckBox from "./CheckBox"
 import RadioInput from "./RadioInput"
 import SearchBar from "./SearchBar"
 import { priceFilter } from "../constants"
+import "./LandingPage.css"
 
 function LandingPage() {
-  const LIMIT = 2
+  const LIMIT = 1
   const [products, setProducts] = useState([])
   const [skip, setSkip] = useState(0)
   const [postSize, setPostSize] = useState()
@@ -112,8 +113,8 @@ function LandingPage() {
   }
 
   return (
-    <div style={{ width: "75%", margin: "3rem auto" }}>
-      <div style={{ textAlign: "center" }}>
+    <div className="LandingPage__Container">
+      <div className="LandingPage__Title">
         <h2>
           Lets Travel Anywhere <RocketOutlined />
         </h2>
@@ -130,7 +131,7 @@ function LandingPage() {
           />
         </Col>
       </Row>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div className="SearchBar__Container">
         <SearchBar searchTerm={searchTerm} refreshFunction={updateSearchTerm} />
       </div>
       {products.length === 0 ? (
@@ -158,13 +159,7 @@ function LandingPage() {
       <br />
       <br />
       {postSize >= LIMIT && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "1rem auto"
-          }}
-        >
+        <div className="LoadMore__Btn__Container">
           <button onClick={onLoadMore}>Load More</button>
         </div>
       )}

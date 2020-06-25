@@ -1,0 +1,12 @@
+:root {
+  --right-menu-icon-color: #667777;
+}
+
+a[href*="/product/upload"] {
+  color: var(--right-menu-icon-color) !important;
+}
+
+a[href*="/user/cart"] {
+  color: var(--right-menu-icon-color) !important;
+  margin-right: -22px;
+}

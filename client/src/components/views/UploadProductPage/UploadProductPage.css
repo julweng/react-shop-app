@@ -1,0 +1,9 @@
+.Upload__Product__Container {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.Upload__Product__Title {
+  text-align: center;
+  margin-bottom: 2rem;
+}

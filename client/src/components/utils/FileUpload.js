@@ -3,7 +3,7 @@ import { func } from "prop-types"
 import Dropzone from "react-dropzone"
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons"
 import { uploadImage } from "../../functions"
-
+import "./FileUpload.css"
 export default function FileUpload({ refreshFunction }) {
   const [images, setImages] = useState([])
 
@@ -20,7 +20,7 @@ export default function FileUpload({ refreshFunction }) {
     const res = await uploadImage(formData, config)
     if (res.success) {
       setImages([...images, res.image])
-    refreshFunction([...images, res.image])
+      refreshFunction([...images, res.image])
     }
   }
 
@@ -32,35 +32,18 @@ export default function FileUpload({ refreshFunction }) {
   }
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div className="File__Upload__Container">
       <Dropzone onDrop={onDrop} multiple={false} maxSize={80000000}>
         {({ getRootProps, getInputProps }) => (
-          <div
-            style={{
-              width: "300px",
-              height: "240px",
-              border: "1px solid lightgray",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-            {...getRootProps()}
-          >
+          <div className="Dropzone__Input__Container" {...getRootProps()}>
             <input {...getInputProps()} />
             <PlusOutlined style={{ fontSize: "3rem" }} />
           </div>
         )}
       </Dropzone>
-      <div
-        style={{
-          display: "flex",
-          width: "350px",
-          height: "240px",
-          overflowX: "scroll"
-        }}
-      >
+      <div className="Dropzone__Image__Container">
         {images.map((image, index) => (
-          <div key={image} style={{ position: "relative" }}>
+          <div key={image} className="DropZone__Minus__Icon__Container">
             <MinusOutlined
               style={{
                 fontSize: "3rem",
@@ -71,7 +54,7 @@ export default function FileUpload({ refreshFunction }) {
               onClick={() => onDelete(index)}
             />
             <img
-              style={{ minWidth: "300px", width: "300px", height: "240px" }}
+              className="Uploaded__Image"
               src={`http://localhost:5000/${image}`}
               alt={`productImg-${image}`}
             />

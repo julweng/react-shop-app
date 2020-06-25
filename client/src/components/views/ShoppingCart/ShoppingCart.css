@@ -1,0 +1,15 @@
+.Shopping__Cart__Container {
+  width: 85%;
+  margin: 3rem auto;
+}
+
+.Total__Amount__Container {
+  margin-top: 3rem;
+}
+
+.No__Items__Msg__Container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

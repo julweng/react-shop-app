@@ -1,6 +1,7 @@
 import React from "react"
 import { arrayOf, string } from "prop-types"
 import { Carousel } from "antd"
+import "./ImageSlider.css"
 
 export default function ImageSlider({ createdAt, images }) {
   return (
@@ -9,9 +10,9 @@ export default function ImageSlider({ createdAt, images }) {
         {images.map((img) => (
           <div key={`${img}_${createdAt}`}>
             <img
+              className="ImageSlider__Image"
               src={`http://localhost:5000/${img}`}
               alt="productImage"
-              style={{ width: "100%", height: "150px" }}
             />
           </div>
         ))}

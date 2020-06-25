@@ -1,6 +1,7 @@
 import React from "react"
 import { func, number, shape, string } from "prop-types"
 import { Button, Descriptions } from "antd"
+import "./ProductInfo.css"
 
 const { Item } = Descriptions
 
@@ -25,7 +26,7 @@ export default function ProductInfo({
         <br />
         <br />
       </Descriptions>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="AddToCart__Btn__Container">
         <Button size="large" shape="round" type="danger" onClick={handleAddToCart}>
           Add to Cart
         </Button>

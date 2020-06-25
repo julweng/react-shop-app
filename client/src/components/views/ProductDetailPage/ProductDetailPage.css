@@ -1,0 +1,10 @@
+.Product__Detail__Container {
+  width: 100%;
+  padding: 3rem 4rem;
+}
+
+.Product__Detail__Title {
+  display: flex;
+  justify-content: center;
+}
+

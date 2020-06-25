@@ -1,0 +1,19 @@
+.LandingPage__Container {
+  width: 75%;
+  margin: 3rem auto;
+}
+
+.LandingPage__Title {
+  text-align: center;
+}
+
+.SearchBar__Container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.LoadMore__Btn__Container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+}

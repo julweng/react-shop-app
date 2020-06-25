@@ -25,7 +25,7 @@ export default function UserCardBlock({ products, handleRemoveItem }) {
               <tr key={p._id}>
                 <td>
                   <img
-                    style={{ width: "70px" }}
+                    className="Product__Image"
                     alt="product"
                     src={renderImage(p.images)}
                   />
@@ -33,7 +33,9 @@ export default function UserCardBlock({ products, handleRemoveItem }) {
                 <td>{p.quantity} EA</td>
                 <td>{p.price}</td>
                 <td>
-                  <button onClick={() => handleRemoveItem(p._id)}>Remove</button>
+                  <button onClick={() => handleRemoveItem(p._id)}>
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}

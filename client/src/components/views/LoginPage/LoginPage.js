@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import { withRouter } from "react-router-dom"
-import { loginUser } from "../../../_actions/user_actions"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import { Form, Input, Button, Checkbox, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { useDispatch } from "react-redux"
+import { loginUser } from "../../../_actions/user_actions"
+import "./LoginPage.css"
 
 const { Title } = Typography
 
@@ -82,7 +83,7 @@ function LoginPage(props) {
         return (
           <div className="app">
             <Title level={2}>Log In</Title>
-            <form onSubmit={handleSubmit} style={{ width: "350px" }}>
+            <form className="Login__Form" onSubmit={handleSubmit}>
               <Form.Item required>
                 <Input
                   id="email"
@@ -124,18 +125,10 @@ function LoginPage(props) {
               </Form.Item>
 
               {formErrorMessage && (
-                <label>
-                  <p
-                    style={{
-                      color: "#ff0000bf",
-                      fontSize: "0.7rem",
-                      border: "1px solid",
-                      padding: "1rem",
-                      borderRadius: "10px"
-                    }}
-                  >
+                <label className="Form__Error__Message">
+                  <picture>
                     {formErrorMessage}
-                  </p>
+                  </picture>
                 </label>
               )}
 
@@ -159,7 +152,6 @@ function LoginPage(props) {
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
-                    style={{ minWidth: "100%" }}
                     disabled={isSubmitting}
                     onSubmit={handleSubmit}
                   >

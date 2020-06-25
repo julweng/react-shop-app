@@ -9,6 +9,7 @@ import {
 } from "../../../_actions/user_actions"
 import { PayPal } from "../../utils"
 import UserCardBlock from "./UserCardBlock"
+import "./ShoppingCart.css"
 
 export default function ShoppingCart({ user: { userData, cartDetail } }) {
   const dispatch = useDispatch()
@@ -77,7 +78,7 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
   }
 
   return (
-    <div style={{ width: "85%", margin: "3rem auto" }}>
+    <div className="Shopping__Cart__Container">
       <h1>My Cart</h1>
       <div>
         <UserCardBlock
@@ -86,7 +87,7 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
         />
 
         {showTotal && (
-          <div style={{ marginTop: "3rem" }}>
+          <div className="Total__Amount__Container">
             <h2>Total amount: ${totalPrice}</h2>
           </div>
         )}
@@ -94,14 +95,7 @@ export default function ShoppingCart({ user: { userData, cartDetail } }) {
           <Result status="success" title="Successfully Purchased Items" />
         )}
         {!showTotal && !showSuccess && (
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center"
-            }}
-          >
+          <div className="No__Items__Msg__Container">
             <br />
             <Empty description={false} />
             <p>No Items in the Cart</p>

@@ -1,0 +1,15 @@
+.Login__Form {
+  width: 350px;
+}
+
+.text-input {
+  color: #ff0000bf;
+  font-size: 0.7rem;
+  border: 1px solid;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.login-form-button {
+  min-width: 100%;
+}

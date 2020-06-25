@@ -51,6 +51,7 @@ export default class Paypal extends React.Component {
                 onError={onError}
                 onSuccess={onSuccess}
                 onCancel={onCancel}
+                className="PayPal__Express__Btn"
                 style={{ 
                     size:'large',
                     color:'blue',

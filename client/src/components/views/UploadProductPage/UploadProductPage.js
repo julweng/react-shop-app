@@ -4,6 +4,7 @@ import { Typography, Button, Form, Input } from "antd"
 import { FileUpload } from "../../utils"
 import { uploadProduct } from "../../../functions"
 import { continentOptions as Continents } from "../constants"
+import "./UploadProductPage.css"
 
 const { Title } = Typography
 const { TextArea } = Input
@@ -59,8 +60,8 @@ export default function UploadProductPage({ user, history: { push } }) {
   }
 
   return (
-    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+    <div className="Upload__Product__Container">
+      <div className="Upload__Product__Title">
         <Title level={2}>UPload Travel Product</Title>
       </div>
       <Form onSubmit={onSubmit}>

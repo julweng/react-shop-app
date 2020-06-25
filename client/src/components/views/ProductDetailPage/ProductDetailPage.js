@@ -6,6 +6,7 @@ import { getProduct } from "../../../functions"
 import ProductImage from "./ProductImage"
 import ProductInfo from "./ProductInfo"
 import { addToCart } from "../../../_actions/user_actions"
+import "./ProductDetailPage.css"
 
 export default function ProductDetailPage({ match: { params: { productId }} }) {
   const dispatch = useDispatch()
@@ -26,8 +27,8 @@ export default function ProductDetailPage({ match: { params: { productId }} }) {
   }
 
   return (
-    <div className="post__page" style={{ width: "100%", padding: "3rem 4rem" }}>
-      <div style={{ display: "flex", justifyContent: "center"}}>
+    <div className="Product__Detail__Container">
+      <div className="Product__Detail__Title">
         <h1>{product.title}</h1>
       </div>
       <br />

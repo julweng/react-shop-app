@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
+import moment from "moment"
 import { getHistory } from "../../../functions"
+import "./HistoryPage.css"
 
 export default function HistoryPage({ user: { userData } }) {
   const [history, setHistory] = useState([])
@@ -15,8 +17,8 @@ export default function HistoryPage({ user: { userData } }) {
   }, [])
 
   return (
-    <div style={{ width: "80%", margin: "3rem auto" }}>
-      <div style={{ textAlign: "center" }}>
+    <div className="History__Container">
+      <div className="History__Title">
         <h1>History</h1>
       </div>
       <br />
@@ -33,11 +35,11 @@ export default function HistoryPage({ user: { userData } }) {
 
         <tbody>
           {history.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.paymentId}>
               <td>{item.id}</td>
               <td>{item.price}</td>
               <td>{item.quantity}</td>
-              <td>{item.dateOfPurchase}</td>
+              <td>{moment(item.dateOfPurchase).format("MM-DD-YYYY hh:mm:ss")}</td>
             </tr>
           ))}
         </tbody>

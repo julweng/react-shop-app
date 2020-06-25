@@ -1,0 +1,30 @@
+.File__Upload__Container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Dropzone__Input__Container {
+  width: 300px;
+  height: 240px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Dropzone__Image__Container {
+  display: flex;
+  width: 350px;
+  height: 240px;
+  overflow-x: scroll;
+}
+
+.DropZone__Minus__Icon__Container {
+  position: relative;
+}
+
+.Uploaded__Image {
+  min-width: 300px;
+  width: 300px;
+  height: 240px;
+}

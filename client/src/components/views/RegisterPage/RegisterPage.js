@@ -2,10 +2,10 @@ import React from "react"
 import { getUnixTime } from "date-fns"
 import { Formik } from "formik"
 import * as Yup from "yup"
-import { registerUser } from "../../../_actions/user_actions"
 import { useDispatch } from "react-redux"
-
 import { Form, Input, Button } from "antd"
+import { registerUser } from "../../../_actions/user_actions"
+import "./RegisterPage.css"
 
 const formItemLayout = {
   labelCol: {
@@ -92,7 +92,7 @@ function RegisterPage(props) {
           <div className="app">
             <h2>Sign up</h2>
             <Form
-              style={{ minWidth: "375px" }}
+              className="Register__Form"
               {...formItemLayout}
               onSubmit={handleSubmit}
             >
